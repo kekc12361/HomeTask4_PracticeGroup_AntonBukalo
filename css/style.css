@@ -1,0 +1,37 @@
+.cell{
+    background-color: #c8ffbd;
+    width: 5px;
+    height: 5px;
+    float: left;
+    text-align: center;
+    font-size: 5px;
+}
+
+.game{
+    padding-top:50px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+button{
+    margin: auto;
+    display: flex;
+    width: 220px;
+}
+
+.cell.wall{
+    background: #000;
+}
+
+.cell.finish{
+    background: red;
+}
+
+.cell.start{
+    background: greenyellow;
+}
+
+.cell.highlight{
+    background: yellow;
+}
+
