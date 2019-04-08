@@ -1,40 +1,53 @@
 function generateBoard(){
     let matrix = createMatrix();
-    fillMatrix(matrix[0],matrix[1]);
-    matrix = matrix[0];
-    let $elements =[];
+    let freeCells = createFreeCells(matrix);
+    fillMatrix(matrix,freeCells);
+    let $elements = [];
+
     document.querySelector('[data-component="game"]').innerHTML='';
     let $container = document.querySelector('[data-component="game"]');
-    let table = document.createElement("table");
+    let $table = document.createElement("table");
+
     for (let i = 0; i < GAME_SETTINGS.rows; i++){
-        let row = document.createElement("div");
+        let $row = document.createElement("div");
+
         for (let j = 0;j < GAME_SETTINGS.cells; j++){
             let cell = matrix[j+i*GAME_SETTINGS.cells].state;
+
             let $el = document.createElement("div");
             $el.classList.add("cell",GAME_SETTINGS.cellsType[cell]);
-            row.appendChild($el);
+
+            $row.appendChild($el);
             $elements.push($el);
         }
-        table.appendChild(row);
+        $table.appendChild($row);
     }
-    $container.appendChild(table);
+    $container.appendChild($table);
     return [$elements,matrix];
 }
 
 function createMatrix(){
-    let freeCells = [],
-    matrix =[];
+    let matrix =[];
     for (let i = 0; i < GAME_SETTINGS.rows*GAME_SETTINGS.cells; i++){
         if (isEven(i)){
             matrix.push({state:1,isVisited:false,distance: GAME_SETTINGS.cells*GAME_SETTINGS.rows});
         }else{
             matrix.push({state:0,isVisited:false,distance: GAME_SETTINGS.cells*GAME_SETTINGS.rows});
-            freeCells.push(i);
         }
     }
     matrix[GAME_SETTINGS.startPosition].state = 2;
     matrix[GAME_SETTINGS.finishPosition].state = 3;
-    return [matrix,freeCells]
+    return matrix
+}
+
+function createFreeCells(matrix){
+    let freeCells = [];
+    for (let i = 0; i < matrix.length; i++){
+        if (!isEven(i)){
+            freeCells.push(i);
+        }
+    }
+    return freeCells;
 }
 
 function isEven(pos){

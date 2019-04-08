@@ -1,6 +1,7 @@
 function findPath(elements, matrix){
     clearVisitedFlags(matrix);
     let finish = movesToPath(elements,matrix);
+
     if (finish) {
         let queue = findStart(elements, matrix, finish);
         moveToFinish(elements, queue);
@@ -11,23 +12,11 @@ function movesToPath(elements,matrix){
     matrix[GAME_SETTINGS.startPosition].distance = 0;
     let queue = [];
     queue.push(GAME_SETTINGS.startPosition);
-    if (matrix[queue[0]].isVisited == true ) {
+    if (matrix[queue[0]].isVisited) {
         alert(" u already did that");
         return false;
     }
-    let finish = null;
-    while (queue.length>0){
-        if (matrix[queue[0]].state == 3) {
-            finish = queue[0];
-           return finish;
-        }
-        setVisited(matrix[queue[0]]);
-        addTopToQueue(matrix,queue,elements);
-        addDownToQueue(matrix,queue,elements);
-        addRightToQueue(matrix,queue,elements);
-        addLeftToQueue(matrix,queue,elements);
-        queue.shift();
-    };
+    let finish = pathFinding(matrix,queue,elements);
     if (finish ===null) {
         alert (" there is no path");
         return false;
@@ -36,8 +25,25 @@ function movesToPath(elements,matrix){
 
 }
 
+function pathFinding(matrix,queue,elements){
+    let finish = null;
+    while (queue.length>0){
+        if (matrix[queue[0]].state == 3) {
+            finish = queue[0];
+            return finish;
+        }
+        setVisited(matrix[queue[0]]);
+        addTopToQueue(matrix,queue,elements);
+        addDownToQueue(matrix,queue,elements);
+        addRightToQueue(matrix,queue,elements);
+        addLeftToQueue(matrix,queue,elements);
+        queue.shift();
+    };
+    return finish;
+}
+
 function isOptionToQueue(element,pos){
-    return isExist(pos) && isNotWall(element)  && (element.isVisited === false);
+    return isExist(pos) && isNotWall(element)  && (!element.isVisited);
 }
 
 function setVisited(element) {

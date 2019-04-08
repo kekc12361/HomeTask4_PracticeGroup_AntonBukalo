@@ -12,12 +12,8 @@ const GAME_SETTINGS = {
     finishPosition:51*50-2
 };
 
-    const defaultDistance = GAME_SETTINGS.cells*GAME_SETTINGS.rows+1
-
-
     window.addEventListener("load", init);
 function init() {
-    // console.log(defaultDistance);
     let $cellElements =  generateBoard();
     document.getElementById('crButton').addEventListener("click",crButtonClick);
     document.getElementById('findButton').addEventListener("click",findClick($cellElements))
@@ -27,8 +23,8 @@ function crButtonClick() {
     init();
 }
 
-let findClick = function (parameters) {
+let findClick = function (elements) {
     return function() {
-       findPath(parameters[0],parameters[1]);
+       findPath(elements[0],elements[1]);
     }
 };
