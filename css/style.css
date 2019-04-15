@@ -1,7 +1,7 @@
 .cell{
     background-color: #c8ffbd;
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     float: left;
     text-align: center;
     font-size: 5px;
@@ -12,13 +12,17 @@
     background: #90ff77;
 
     border: none;
-    width: 765px;
+    width: 410px;
     height: 50px;
     font-size:30px;
     margin: 10px auto;
     cursor: pointer;
     border-radius: 5px;
     box-shadow: #c3ffb8 0 2px 0 0
+}
+
+.button:hover{
+    border:1px solid black;
 }
 
 .game{
