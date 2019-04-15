@@ -1,7 +1,7 @@
 .cell{
     background-color: #c8ffbd;
-    width: 5px;
-    height: 5px;
+    width: 15px;
+    height: 15px;
     float: left;
     text-align: center;
     font-size: 5px;
@@ -12,8 +12,9 @@
     background: #90ff77;
 
     border: none;
-    width: 254px;
-    height: 33px;
+    width: 765px;
+    height: 50px;
+    font-size:30px;
     margin: 10px auto;
     cursor: pointer;
     border-radius: 5px;
